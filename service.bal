@@ -28,9 +28,9 @@ service http:Service / on new http:Listener(9090) {
     isolated resource function get patient/[string id](string emr) returns http:Response|http:ClientError {
         http:Response|http:ClientError res;
         if (emr === "epic") {
-            res = epicApi->get(id);
+            res = epicApi->get("Patient/"+id);
         } else if (emr === "cerner") {
-            res = cernerApi->get(id);
+            res = cernerApi->get("Patient/"+id);
         } else {
             res = handleError("Invalid EMR", 500);
         }
