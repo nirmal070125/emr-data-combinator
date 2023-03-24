@@ -11,6 +11,7 @@
 
 
 import ballerina/http;
+import ballerina/log;
 
 configurable string epic_connect_api = ?;
 configurable string cerner_connect_api = ?;
@@ -26,6 +27,7 @@ service http:Service / on new http:Listener(9090) {
 
     // Get resource by ID
     isolated resource function get patient/[string id](string emr) returns http:Response|http:ClientError {
+        log:printInfo("Get patient by ID: " + id + " from " + emr);
         http:Response|http:ClientError res;
         if (emr === "epic") {
             res = epicApi->get("Patient/"+id);
