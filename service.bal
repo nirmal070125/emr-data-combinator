@@ -64,9 +64,9 @@ service http:Service / on new http:Listener(9090) {
         log:printInfo("Get patient by ID: " + id + " from " + emr);
         http:Response|http:ClientError res;
         if (emr === "epic") {
-            res = epicApi->get("/Patient/" + id);
+            res = epicApi->get("/fhir/r4/Patient/" + id);
         } else if (emr === "cerner") {
-            res = cernerApi->get("/Patient/" + id);
+            res = cernerApi->get("/fhir/r4/Patient/" + id);
         } else {
             res = handleError("Invalid [EMR] " + emr, 404);
         }
